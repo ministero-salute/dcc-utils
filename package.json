@@ -1,0 +1,35 @@
+{
+  "name": "dcc-utils",
+  "version": "0.0.0",
+  "description": "DCC utils for NodeJS",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Ministero della Salute",
+  "license": "ISC",
+  "dependencies": {
+    "base45": "^3.0.0",
+    "cbor": "^7.0.6",
+    "certlogic-js": "^0.8.0",
+    "cose-js": "^0.6.0",
+    "jimp": "^0.16.1",
+    "jsqr": "^1.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.4.0",
+    "jest": "^27.0.6"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "./src/*.js"
+    ]
+  }
+}
