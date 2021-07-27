@@ -1,0 +1,68 @@
+{
+  "Identifier": "VR-DE-0004",
+  "Type": "Acceptance",
+  "Country": "DE",
+  "Version": "1.0.0",
+  "SchemaVersion": "1.0.0",
+  "Engine": "CERTLOGIC",
+  "EngineVersion": "0.7.5",
+  "CertificateType": "Vaccination",
+  "Description": [
+    {
+      "lang": "en",
+      "desc": "The vaccine must have been administered no longer than one year ago."
+    },
+    {
+      "lang": "de",
+      "desc": "Seit der Impfung darf maximal ein Jahr vergangen sein."
+    },
+    {
+      "lang": "fr",
+      "desc": "La vaccination ne doit pas dater de plus d’un an."
+    },
+    {
+      "lang": "es",
+      "desc": "Debe haber transcurrido como máximo un año desde la vacuna."
+    },
+    {
+      "lang": "it",
+      "desc": "La vaccinazione non può risalire a più di 365 giorni fa."
+    }
+  ],
+  "ValidFrom": "2021-07-03T00:00:00Z",
+  "ValidTo": "2030-06-01T00:00:00Z",
+  "AffectedFields": [
+    "v.0",
+    "v.0.dt"
+  ],
+  "Logic": {
+    "if": [
+      {
+        "var": "payload.v.0"
+      },
+      {
+        "not-after": [
+          {
+            "plusTime": [
+              {
+                "var": "external.validationClock"
+              },
+              0,
+              "day"
+            ]
+          },
+          {
+            "plusTime": [
+              {
+                "var": "payload.v.0.dt"
+              },
+              365,
+              "day"
+            ]
+          }
+        ]
+      },
+      true
+    ]
+  }
+}

@@ -9,6 +9,14 @@ describe('Testing Rule', () => {
     expect(rule.evaluateDCC(dcc)).toStrictEqual(true);
   });
 
+  test('out of time', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/valid_certificate.png');
+    const rule = Rule.fromFile('./test/test_data/de_v_rule_2.json', {
+      validationClock: new Date("2022-10-10").toISOString()
+    });
+    expect(rule.evaluateDCC(dcc)).toStrictEqual(false);
+  });
+
   test('get description', async () => {
     const rule = Rule.fromFile('./test/test_data/de_v_rule.json');
     expect(rule.getDescription()).toStrictEqual('The vaccination schedule must be complete (e.g., 1/1, 2/2).');
