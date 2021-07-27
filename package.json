@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "jest"
+    "test": "eslint src test && jest"
   },
   "author": "Ministero della Salute",
   "license": "ISC",
