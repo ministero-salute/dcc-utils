@@ -12,7 +12,7 @@ describe('Testing Rule', () => {
   test('out of time', async () => {
     const dcc = await DCC.fromImage('./test/test_data/valid_certificate.png');
     const rule = Rule.fromFile('./test/test_data/de_v_rule_2.json', {
-      validationClock: new Date("2022-10-10").toISOString()
+      validationClock: new Date('2022-10-10').toISOString(),
     });
     expect(rule.evaluateDCC(dcc)).toStrictEqual(false);
   });

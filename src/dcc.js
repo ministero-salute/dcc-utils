@@ -12,8 +12,8 @@ class DCC {
     const dcc = new DCC();
     dcc._raw = certificateRaw;
     const base45Data = base45.decode(certificateRaw.slice(4));
-    const coseRaw = zlib.inflateSync(base45Data);
-    const cborPayload = cbor.decodeFirstSync(coseRaw).value[2];
+    dcc._coseRaw = zlib.inflateSync(base45Data);
+    const cborPayload = cbor.decodeFirstSync(dcc._coseRaw).value[2];
     const jsonCBOR = cbor.decodeFirstSync(cborPayload);
     dcc._payload = jsonCBOR.get(-260).get(1);
     return dcc;
@@ -34,15 +34,11 @@ class DCC {
     return this._payload;
   }
 
-  async checkSignature(signature) {
+  async checkSignature(signatureKey) {
     const verifier = {
-      key: {
-        x: Buffer.from(signature.pub.x),
-        y: Buffer.from(signature.pub.y),
-        kid: Buffer.from(signature.kid),
-      },
+      key: signatureKey,
     };
-    return cose.sign.verify(this._raw, verifier);
+    return cose.sign.verify(this._coseRaw, verifier);
   }
 }
 

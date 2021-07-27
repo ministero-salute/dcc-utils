@@ -1,3 +1,5 @@
+const rs = require('jsrsasign');
+const rsu = require('jsrsasign-util');
 const { DCC } = require('../src');
 
 jest.setTimeout(10000);
@@ -16,6 +18,23 @@ describe('Testing DCC', () => {
 
   test('reading not valid certificate', async () => {
     expect(async () => DCC.fromImage('./test/test_data/not_valid_certificate.png').toThrowError(
+      Error(),
+    ));
+  });
+
+  test('verify signature', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/signed_cert.png');
+    const crt = rsu.readFile('./test/test_data/signing_certificate.crt');
+    const verifier = rs.KEYUTIL.getKey(crt).getPublicKeyXYHex();
+    const verified = await dcc.checkSignature(verifier);
+    expect(verified);
+  });
+
+  test('verify wrong signature throws an exception', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/signed_cert.png');
+    const crt = rsu.readFile('./test/test_data/wrong_signing_certificate.crt');
+    const verifier = rs.KEYUTIL.getKey(crt).getPublicKeyXYHex();
+    expect(async () => dcc.checkSignature(verifier).toThrowError(
       Error(),
     ));
   });
