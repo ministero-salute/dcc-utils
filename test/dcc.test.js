@@ -26,8 +26,9 @@ describe('Testing DCC', () => {
     const dcc = await DCC.fromImage('./test/test_data/signed_cert.png');
     const crt = rsu.readFile('./test/test_data/signing_certificate.crt');
     const verifier = rs.KEYUTIL.getKey(crt).getPublicKeyXYHex();
+    console.log(verifier)
     const verified = await dcc.checkSignature(verifier);
-    expect(verified);
+    expect(verified).not.toBeNull();
   });
 
   test('verify wrong signature throws an exception', async () => {
