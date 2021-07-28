@@ -1,16 +1,35 @@
 {
   "name": "dcc-utils",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "DCC utils for NodeJS",
-  "main": "main.js",
-  "directories": {
-    "lib": "lib"
+  "keywords": [
+    "health",
+    "covid19",
+    "utils",
+    "rules",
+    "validation",
+    "dcc"
+  ],
+  "homepage": "https://github.com/ministero-salute/dcc-utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ministero-salute/dcc-utils.git"
   },
+  "bugs": {
+    "url": "https://github.com/ministero-salute/dcc-utils/issues"
+  },
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "eslint src test && jest"
   },
   "author": "Ministero della Salute",
-  "license": "ISC",
+  "contributors": [
+    "Andrea Stagi <andrea.stagi@teamdigitale.governo.it>"
+  ],
+  "license": "AGPL-3.0",
   "dependencies": {
     "base45": "^3.0.0",
     "cbor": "^7.0.6",
