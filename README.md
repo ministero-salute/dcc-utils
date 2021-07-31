@@ -10,6 +10,9 @@
     <a href="https://github.com/ministero-salute/dcc-utils/blob/master/CODE_OF_CONDUCT.md">
       <img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" />
     </a>
+    <a href="https://github.com/ministero-salute/dcc-utils/actions/workflows/ci.yml">
+      <img src="https://github.com/ministero-salute/dcc-utils/actions/workflows/ci.yml/badge.svg" />
+    </a>
 </div>
 
 
