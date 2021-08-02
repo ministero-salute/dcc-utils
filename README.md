@@ -13,6 +13,10 @@
     <a href="https://github.com/ministero-salute/dcc-utils/actions/workflows/ci.yml">
       <img src="https://github.com/ministero-salute/dcc-utils/actions/workflows/ci.yml/badge.svg" />
     </a>
+    <a href="https://www.npmjs.com/package/dcc-utils">
+      <img src="https://img.shields.io/npm/v/dcc-utils.svg?logo=npm" />
+  </a>
+
 </div>
 
 
