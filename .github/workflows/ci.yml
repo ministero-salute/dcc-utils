@@ -20,4 +20,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run test
-      - run: ./node_modules/.bin/codecov
+      - name: Upload coverage
+        uses: codecov/codecov-action@v2

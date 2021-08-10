@@ -10,6 +10,15 @@
     <a href="https://github.com/ministero-salute/dcc-utils/blob/master/CODE_OF_CONDUCT.md">
       <img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" />
     </a>
+    <a href="https://www.npmjs.com/package/dcc-utils">
+      <img src="https://img.shields.io/npm/v/dcc-utils.svg?logo=npm" />
+    </a>
+    <a href="https://github.com/ministero-salute/dcc-utils/actions/workflows/ci.yml">
+      <img src="https://github.com/ministero-salute/dcc-utils/actions/workflows/ci.yml/badge.svg" />
+    </a>
+    <a href="https://codecov.io/gh/ministero-salute/dcc-utils">
+      <img src="https://img.shields.io/codecov/c/github/ministero-salute/dcc-utils.svg" />
+    </a>
 </div>
 
 
