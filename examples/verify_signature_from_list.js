@@ -1,3 +1,8 @@
+/*
+* Example data taken from covid-pass-verifier by Csongor Bokay 
+* https://github.com/bcsongor/covid-pass-verifier
+*/
+
 const fetch = require('node-fetch');
 const { DCC } = require('../src');
 

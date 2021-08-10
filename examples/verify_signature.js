@@ -1,3 +1,8 @@
+/*
+* Example data taken from  
+* https://dgc.a-sit.at/ehn/
+*/
+
 const rs = require('jsrsasign');
 const rsu = require('jsrsasign-util');
 const { DCC } = require('../src');
