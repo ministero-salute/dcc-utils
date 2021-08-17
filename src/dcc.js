@@ -6,6 +6,7 @@ const jsQR = require('jsqr');
 const base45 = require('base45');
 const cbor = require('cbor');
 const cose = require('cose-js');
+const { verify, webcrypto } = require('cosette/build/sign');
 
 class DCC {
   static async fromRaw(certificateRaw) {
@@ -39,6 +40,26 @@ class DCC {
       key: signatureKey,
     };
     return cose.sign.verify(this._coseRaw, verifier);
+  }
+
+  async checkSignatureWithKeysList(keys) {
+    try {
+      let cert;
+      await verify(this._coseRaw, async (kid) => {
+        cert = keys[kid.toString('base64')];
+        return {
+          key: await webcrypto.subtle.importKey(
+            'spki',
+            Buffer.from(cert.publicKeyPem, 'base64'),
+            cert.publicKeyAlgorithm,
+            true, ['verify'],
+          ),
+        };
+      });
+      return cert;
+    } catch (e) {
+      return false;
+    }
   }
 }
 

@@ -1,0 +1,19 @@
+{
+  "OTAXaM3aBRM=": {
+    "serialNumber": "46576ee6bb1fac3799b43071ac9f92ba332bd88b",
+    "subject": "C=IT, O=Ministero della Salute, CN=Italy DGC DSC 1",
+    "issuer": "C=IT, O=Ministero della Salute, CN=Italy DGC CSCA 1",
+    "notBefore": "2021-05-12T08:18:17.000Z",
+    "notAfter": "2023-05-12T08:11:59.000Z",
+    "signatureAlgorithm": "RSASSA-PKCS1-v1_5",
+    "fingerprint": "8ff39d880aa2fb3628a8e49020074cc44cdc61f0",
+    "publicKeyAlgorithm": {
+      "hash": {
+        "name": "SHA-256"
+      },
+      "name": "ECDSA",
+      "namedCurve": "P-256"
+    },
+    "publicKeyPem": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENKnu3zonECaNkWhuaa7TCSKLneydG7CpVZ7f+D/BXP2LfTpcDmJekeRE9lVSRJmZiG60wOuF6Dqx/AxF2qXdpg=="
+  }
+}
