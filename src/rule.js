@@ -3,9 +3,13 @@ const certLogicJs = require('certlogic-js');
 
 class Rule {
   static fromFile(filePath, external = {}) {
+    return Rule.fromJSON(JSON.parse(fs.readFileSync(filePath)), external);
+  }
+
+  static fromJSON(ruleJSON, external = {}) {
     const rule = new Rule();
     rule._external = external;
-    rule._payload = JSON.parse(fs.readFileSync(filePath));
+    rule._payload = ruleJSON;
     return rule;
   }
 

@@ -87,7 +87,23 @@ const rule = Rule.fromFile('de_v0001_rule.json', {
 rule.evaluateDCC(dcc)
 ```
 
-See [check_rules.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/check_rules.js) example.
+You can also get rules from API
+
+```js
+const { DCC, Rule } = require('dcc-utils');
+
+const dcc = await DCC.fromImage('/data/QRCodeDCC.png');
+const VR_DE_0001_RULE_URL = "https://dgca-businessrule-service.cfapps.eu10.hana.ondemand.com/rules/de/bc092f8000606c57a8fd80bc7a31ff720a4c4428510d88c774bed2f839c76b66";
+const response = await fetch(VR_DE_0001_RULE_URL);
+const ruleJSON = await response.json();
+const rule = Rule.fromJSON(ruleJSON, {
+  validationClock: new Date().toISOString(),
+});
+
+rule.evaluateDCC(dcc)
+```
+
+See [check_rules.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/check_rules.js) and [check_rules_from_api.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/check_rules_from_api.js) examples.
 
 # Contributing
 Contributions are most welcome. Before proceeding, please read the [Code of Conduct](https://github.com/ministero-salute/dcc-utils/blob/master/CODE_OF_CONDUCT.md) for guidance on how to approach the community and create a positive environment. Additionally, please read our [CONTRIBUTING](https://github.com/ministero-salute/dcc-utils/blob/master/CONTRIBUTING.md) file, which contains guidance on ensuring a smooth contribution process.
