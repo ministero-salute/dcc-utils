@@ -6,7 +6,7 @@ const jsQR = require('jsqr');
 const base45 = require('base45');
 const cbor = require('cbor');
 const cose = require('cose-js');
-const { verify, webcrypto } = require('cosette/build/sign');
+const { verify, webcrypto, SignatureMismatchError } = require('cosette/build/sign');
 
 class DCC {
   static async fromRaw(certificateRaw) {
@@ -42,6 +42,13 @@ class DCC {
     return cose.sign.verify(this._coseRaw, verifier);
   }
 
+  /**
+   *
+   * @param keys associative array of keys, [kid => {key}]
+   * @returns {Promise<boolean|*>} return a promise, if the certificate is validly signed with
+   * a listed key, return the key with infos about authority that signed it. If the certificate
+   * is not validly signed, return false. If the keys is not in list, throw Error.
+   */
   async checkSignatureWithKeysList(keys) {
     try {
       let cert;
@@ -58,7 +65,14 @@ class DCC {
       });
       return cert;
     } catch (e) {
-      return false;
+      if (e instanceof SignatureMismatchError) {
+        return false;
+      }
+      if (e.message === 'Cannot read property \'publicKeyPem\' of undefined') {
+        throw new Error('Cannot verify signature: the key that signed the certificate is not listed',
+          { cause: e });
+      }
+      throw e;
     }
   }
 }
