@@ -20,9 +20,9 @@ describe('Testing DCC', () => {
   });
 
   test('reading not valid certificate', async () => {
-    expect(async () => DCC.fromImage('./test/test_data/not_valid_certificate.png').toThrowError(
-      Error(),
-    ));
+    await expect(async () => DCC.fromImage('./test/test_data/not_valid_certificate.png'))
+      .rejects
+      .toThrow('incorrect header check');
   });
 
   test('verify signature', async () => {
@@ -37,9 +37,9 @@ describe('Testing DCC', () => {
     const dcc = await DCC.fromImage('./test/test_data/signed_cert.png');
     const crt = rsu.readFile('./test/test_data/wrong_signing_certificate.crt');
     const verifier = rs.KEYUTIL.getKey(crt).getPublicKeyXYHex();
-    expect(async () => dcc.checkSignature(verifier).toThrowError(
-      Error(),
-    ));
+    await expect(async () => dcc.checkSignature(verifier))
+      .rejects
+      .toThrow('Signature missmatch');
   });
 
   /* verify signature from list v2 */
