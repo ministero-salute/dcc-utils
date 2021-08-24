@@ -1,5 +1,5 @@
 /*
-* Trust list taken from covid-pass-verifier by Csongor Bokay 
+* Trust list taken from covid-pass-verifier by Csongor Bokay
 * https://github.com/bcsongor/covid-pass-verifier
 */
 

@@ -1,6 +1,9 @@
 const rs = require('jsrsasign');
 const rsu = require('jsrsasign-util');
 const { DCC } = require('../src');
+const {
+  ValidTestKeys, ValidWrongKeys, InvalidKeys, EmptyKeys,
+} = require('./test_data/sanipasse_format_keys.json');
 
 jest.setTimeout(10000);
 
@@ -17,9 +20,9 @@ describe('Testing DCC', () => {
   });
 
   test('reading not valid certificate', async () => {
-    expect(async () => DCC.fromImage('./test/test_data/not_valid_certificate.png').toThrowError(
-      Error(),
-    ));
+    await expect(async () => DCC.fromImage('./test/test_data/not_valid_certificate.png'))
+      .rejects
+      .toThrow('incorrect header check');
   });
 
   test('verify signature', async () => {
@@ -34,8 +37,39 @@ describe('Testing DCC', () => {
     const dcc = await DCC.fromImage('./test/test_data/signed_cert.png');
     const crt = rsu.readFile('./test/test_data/wrong_signing_certificate.crt');
     const verifier = rs.KEYUTIL.getKey(crt).getPublicKeyXYHex();
-    expect(async () => dcc.checkSignature(verifier).toThrowError(
-      Error(),
-    ));
+    await expect(async () => dcc.checkSignature(verifier))
+      .rejects
+      .toThrow('Signature missmatch');
+  });
+
+  /* verify signature from list v2 */
+
+  test('verify from list v2, valid from test-list', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/signed_with_italian_test_key.png');
+    const authority = await dcc.checkSignatureWithKeysList(ValidTestKeys);
+    expect(authority).not.toBeNull();
+    expect(authority.issuer).toStrictEqual('C=IT, O=Ministero della Salute, CN=Italy DGC CSCA 1');
+  });
+
+  test('verify from list v2, unlisted key', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/signed_with_italian_test_key.png');
+    const verify = async () => dcc.checkSignatureWithKeysList(EmptyKeys);
+    await expect(verify())
+      .rejects
+      .toThrow('Cannot verify signature: the key that signed the certificate is not listed');
+  });
+
+  test('verify from list v2, invalid signature', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/signed_with_italian_test_key.png');
+    const verify = await dcc.checkSignatureWithKeysList(ValidWrongKeys);
+    await expect(verify).toBeFalsy();
+  });
+
+  test('verify from list v2, generic error', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/signed_with_italian_test_key.png');
+    const verify = async () => dcc.checkSignatureWithKeysList(InvalidKeys);
+    await expect(verify())
+      .rejects
+      .toThrow('Data does not match to PublicKeyInfo ASN1 schema. ');
   });
 });
