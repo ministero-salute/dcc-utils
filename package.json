@@ -23,7 +23,8 @@
     "src"
   ],
   "scripts": {
-    "test": "eslint src test && jest"
+    "test": "eslint src test && jest",
+    "build": "echo 'TODO'"
   },
   "author": "Ministero della Salute",
   "contributors": [
