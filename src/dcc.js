@@ -50,8 +50,8 @@ class DCC {
    * is not validly signed, return false. If the keys is not in list, throw Error.
    */
   async checkSignatureWithKeysList(keys) {
+    let cert;
     try {
-      let cert;
       await verify(this._coseRaw, async (kid) => {
         cert = keys[kid.toString('base64')];
         return {
@@ -68,7 +68,7 @@ class DCC {
       if (e instanceof SignatureMismatchError) {
         return false;
       }
-      if (e.message === 'Cannot read property \'publicKeyPem\' of undefined') {
+      if (typeof cert === 'undefined') {
         throw new Error('Cannot verify signature: the key that signed the certificate is not listed',
           { cause: e });
       }
