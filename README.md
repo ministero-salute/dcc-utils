@@ -1,7 +1,7 @@
 <h1 align="center">DCC Utils</h1>
 
 <div align="center">
-<img width="256" height="256" src="img/logo-dcg.png">
+<img width="256" height="256" src="img/logo-dgc.png">
 </div>
 
 <br />
