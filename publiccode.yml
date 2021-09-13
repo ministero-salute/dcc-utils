@@ -1,4 +1,70 @@
-# publiccode.yml file
-# To correctly create the file, please see:
-# Specification: https://docs.italia.it/italia/developers-italia/publiccodeyml/it/core-0.2.1/index.html
-# Editor: https://publiccode-editor.developers.italia.it/
+publiccodeYmlVersion: "0.2"
+applicationSuite: it-dgc
+url: "https://github.com/ministero-salute/dcc-utils"
+name: DCC-Utils
+releaseDate: '2021-08-08'
+softwareType: standalone/mobile
+softwareVersion: 0.1.0
+developmentStatus: stable
+logo: img/logo-dgc.png
+platforms:
+  - windows, mac, linux
+usedBy:
+  - Ministero della Salute
+categories:
+  - data-visualization
+description:
+  en:
+    apiDocumentation: "https://github.com/ministero-salute/it-dgc-documentation"
+    documentation: "https://github.com/ministero-salute/dcc-utils"
+    features:
+      - Get DCC data
+      - Verify DCC signature
+      - Check DCC rules
+    genericName: DCC-Utils
+    longDescription: >
+      NPM package containing a set of utilities to read EU Digital COVID 
+      Certificates, verify signatures and rules. 
+      You can fine more info on how to install and use DCC-Utils library
+      [here](https://github.com/ministero-salute/dcc-utils#readme).
+      You can find some examples on how to use DCC-Utils package inside the
+      [examples folder](https://github.com/ministero-salute/dcc-utils/tree/master/examples).
+      For more info about DCC, please read [our documentation](https://github.com/ministero-salute/it-dgc-documentation).
+    shortDescription: >-
+      NPM package containing a set of utilities to read EU Digital COVID 
+      Certificates, verify signatures and rules.
+intendedAudience:
+  scope:
+    - emergency-services
+    - government
+    - healthcare
+    - security
+    - welfare
+    - local-authorities
+it:
+  countryExtensionVersion: "0.2"
+  riuso:
+    codiceIPA: m_sa
+  conforme:
+    gdpr: true
+    lineeGuidaDesign: true
+    misureMinimeSicurezza: true
+    modelloInteroperabilita: true
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+legal:
+  license: AGPL-3.0-only
+  mainCopyrightOwner: >-
+    Ministero della Salute
+  repoOwner: Ministero della Salute
+localisation:
+  availableLanguages:
+    - en
+  localisationReady: true
+maintenance:
+  contacts:
+    - name: Ministero della Salute
+  type: internal
