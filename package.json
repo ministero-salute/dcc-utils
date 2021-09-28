@@ -20,10 +20,13 @@
   },
   "main": "src/index.js",
   "files": [
-    "src"
+    "src",
+    "types/index.d.ts"
   ],
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "eslint src test && jest",
+    "test:types": "npx tsd",
     "build": "echo 'TODO'"
   },
   "author": "Ministero della Salute",
@@ -49,7 +52,8 @@
     "jest": "^27.0.6",
     "jsrsasign": "^10.3.0",
     "jsrsasign-util": "^1.0.5",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "tsd": "^0.17.0"
   },
   "jest": {
     "collectCoverage": true,
