@@ -6,6 +6,7 @@ const jsQR = require('jsqr');
 const base45 = require('base45');
 const cbor = require('cbor');
 const cose = require('cose-js');
+const rs = require('jsrsasign');
 const { verify, webcrypto, SignatureMismatchError } = require('cosette/build/sign');
 
 class DCC {
@@ -40,6 +41,23 @@ class DCC {
       key: signatureKey,
     };
     return cose.sign.verify(this._coseRaw, verifier);
+  }
+
+  async checkSignatureWithCertificate(certificate) {
+    const key = rs.KEYUTIL.getKey(certificate);
+    let verifier;
+    if (key.type === 'EC') {
+      verifier = key.getPublicKeyXYHex();
+    } else if (key.type === 'RSA') {
+      const jwk = rs.KEYUTIL.getJWKFromKey(key);
+      verifier = {
+        n: Buffer.from(jwk.n, 'base64'),
+        e: Buffer.from(jwk.e, 'base64'),
+      };
+    } else {
+      throw new Error('Certificate not supported');
+    }
+    return cose.sign.verify(this._coseRaw, { key: verifier });
   }
 
   /**

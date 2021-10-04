@@ -29,8 +29,25 @@ describe('Testing DCC', () => {
     const dcc = await DCC.fromImage('./test/test_data/signed_cert.png');
     const crt = rsu.readFile('./test/test_data/signing_certificate.crt');
     const verifier = rs.KEYUTIL.getKey(crt).getPublicKeyXYHex();
-    const verified = await dcc.checkSignature(verifier);
+    let verified = await dcc.checkSignature(verifier);
     expect(verified).not.toBeNull();
+    verified = await dcc.checkSignatureWithCertificate(crt);
+    expect(verified).not.toBeNull();
+  });
+
+  test('verify signature RSA', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/valid_ch_certificate.png');
+    const crt = rsu.readFile('./test/test_data/cert_rsa.crt');
+    const verified = await dcc.checkSignatureWithCertificate(crt);
+    expect(verified).not.toBeNull();
+  });
+
+  test('verify signature not supported certificate', async () => {
+    const dcc = await DCC.fromImage('./test/test_data/valid_ch_certificate.png');
+    const crt = rsu.readFile('./test/test_data/512b-dsa-example-cert.pem');
+    await expect(async () => dcc.checkSignatureWithCertificate(crt))
+      .rejects
+      .toThrow('Certificate not supported');
   });
 
   test('verify wrong signature throws an exception', async () => {
@@ -38,6 +55,9 @@ describe('Testing DCC', () => {
     const crt = rsu.readFile('./test/test_data/wrong_signing_certificate.crt');
     const verifier = rs.KEYUTIL.getKey(crt).getPublicKeyXYHex();
     await expect(async () => dcc.checkSignature(verifier))
+      .rejects
+      .toThrow('Signature missmatch');
+    await expect(async () => dcc.checkSignatureWithCertificate(crt))
       .rejects
       .toThrow('Signature missmatch');
   });
