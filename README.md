@@ -65,14 +65,15 @@ See [get_dcc_from_raw_and_image.js](https://github.com/ministero-salute/dcc-util
 With dcc-utils you can also verify its signature
 
 ```js
-const verified = await dcc.checkSignature(myVerifier);
+const verified = await dcc.checkSignatureWithCertificate(myCert);
 if (verified) {
   console.log(dcc.payload);
 }
 ```
 
-See [verify_signature.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature.js), [verify_signature_from_list.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature_from_list.js) and [verify_signature_raw.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature_raw.js) examples. Signature verification uses CoseJS library under the hood, see [CoseJS documentation](https://github.com/erdtman/cose-js) for more details.
+If you need to use different types of key, use `checkSignature` method (see [verify_signature_raw.js example](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature_raw.js)).
 
+See [verify_signature.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature.js)and [verify_signature_from_list.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature_from_list.js) examples. Signature verification uses CoseJS library under the hood, see [CoseJS documentation](https://github.com/erdtman/cose-js) for more details.
 
 With dcc-utils you can evaluate [business rules](https://github.com/ehn-dcc-development/dgc-business-rules) against a DCC
 
