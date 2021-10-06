@@ -21,7 +21,7 @@
   "main": "src/index.js",
   "files": [
     "src",
-    "types/index.d.ts"
+    "types"
   ],
   "types": "types/index.d.ts",
   "scripts": {
