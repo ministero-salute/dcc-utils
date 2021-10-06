@@ -1,18 +1,19 @@
 // Node.js script to refresh the accepted certificates list
-import fetch from 'node-fetch';
-import { X509Certificate, PublicKey } from '@peculiar/x509';
-import crypto from 'isomorphic-webcrypto';
-import fs from 'fs';
+const fetch = require('node-fetch');
+const { X509Certificate, PublicKey } = require('@peculiar/x509');
+const crypto = require('isomorphic-webcrypto');
+const fs = require('fs');
 
 const ENDPOINT = 'https://get.dgc.gov.it/v1/dgc/signercertificate';
-const OUTFILE = './certificates.json';
+const OUTFILE = 'examples/data/certificates.json';
 
 async function main() {
 
   const certs = await loadKeys()
   const contents = JSON.stringify(certs, null, '\t') + '\n';
   await fs.promises.writeFile(OUTFILE, contents);
-  console.log(`Wrote ${Object.keys(certs).length} certificates to ${OUTFILE}`);
+  const l = Object.values(certs).filter(c => !!c).length
+  console.log(`Wrote ${l} certificates to ${OUTFILE}`);
 }
 
 async function loadCertificates(resumeToken, keys) {
@@ -31,13 +32,13 @@ async function loadCertificates(resumeToken, keys) {
 }
 
 async function loadKeys() {
-  console.log('Loading certificates...');
-
+  console.log('Loading KIDS...');
   const resp = await fetch(`${ENDPOINT}/status`);
   const kids = await resp.json();
   const keys = kids.reduce((acc, kid) => ({ ...acc, [kid]: null }), {})
 
   console.log(`${kids.length} KIDS found`);
+  console.log('Loading certificates...');
   return await loadCertificates(0, keys)
 }
 

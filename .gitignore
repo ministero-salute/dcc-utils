@@ -6,6 +6,7 @@
 node_modules
 dcc-testdata
 dgc-business-rules-testdata
+examples/data/certificates.json
 
 mycodes/
 coverage/
