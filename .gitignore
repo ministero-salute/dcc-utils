@@ -1,4 +1,4 @@
-# Insert here the files/folders/extensions you would like to exclude from git tracking 
+# Insert here the files/folders/extensions you would like to exclude from git tracking
 
 .DS_Store
 
@@ -10,3 +10,6 @@ examples/data/certificates.json
 
 mycodes/
 coverage/
+
+# IDE
+.idea
