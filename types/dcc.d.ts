@@ -13,6 +13,8 @@ declare class DCC {
 
   checkSignature(signatureKey: { x: Buffer, y: Buffer, kid?: Buffer }): Promise<Buffer>;
 
+  checkSignatureWithCertificate(certificate: Buffer): Promise<Buffer>;
+
   /**
    *
    * @param keys associative array of keys, [kid => {key}]
