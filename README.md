@@ -75,6 +75,8 @@ If you need to use different types of key, use `checkSignature` method (see [ver
 
 See [verify_signature.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature.js)and [verify_signature_from_list.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/verify_signature_from_list.js) examples. Signature verification uses CoseJS library under the hood, see [CoseJS documentation](https://github.com/erdtman/cose-js) for more details.
 
+To load te cerficates from `https://get.dgc.gov.it` you can use [fetch_certificates.js](https://github.com/ministero-salute/dcc-utils/blob/master/examples/fetch_certificates.js) The exported format is compatible with the method `dcc.checkSignatureWithKeysList`
+
 With dcc-utils you can evaluate [business rules](https://github.com/ehn-dcc-development/dgc-business-rules) against a DCC
 
 ```js

@@ -43,6 +43,7 @@
     "jsrsasign-util": "^1.0.5"
   },
   "devDependencies": {
+    "@peculiar/x509": "^1.4.1",
     "codecov": "^3.8.3",
     "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",
