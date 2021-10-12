@@ -2,9 +2,9 @@ publiccodeYmlVersion: "0.2"
 applicationSuite: it-dgc
 url: "https://github.com/ministero-salute/dcc-utils"
 name: DCC-Utils
-releaseDate: '2021-09-13'
+releaseDate: '2021-10-12'
 softwareType: standalone/mobile
-softwareVersion: v0.2.0
+softwareVersion: v0.3.0
 developmentStatus: stable
 logo: img/logo-dgc.png
 platforms:
