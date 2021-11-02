@@ -15,15 +15,15 @@ class DCC {
     dcc._raw = certificateRaw;
     const base45Data = base45.decode(certificateRaw.slice(4));
     dcc._coseRaw = zlib.inflateSync(base45Data);
-	const messageObject = cbor.decodeFirstSync(dcc._coseRaw);
-	const protectedHeader = messageObject.value[0];
-	const unprotectedHeader = messageObject.value[1];	
+    const messageObject = cbor.decodeFirstSync(dcc._coseRaw);
+    const protectedHeader = messageObject.value[0];
+    const unprotectedHeader = messageObject.value[1];	
     const cborPayload = messageObject.value[2];
     const jsonCBOR = cbor.decodeFirstSync(cborPayload);
     dcc._payload = jsonCBOR.get(-260).get(1);
-	var kid = cbor.decodeFirstSync(protectedHeader).get(4);
-	if(kid === undefined) kid = unprotectedHeader.get(4);
-	dcc._kid = new Buffer(kid).toString('base64');
+    var kid = cbor.decodeFirstSync(protectedHeader).get(4);
+    if(kid === undefined) kid = unprotectedHeader.get(4);
+    dcc._kid = new Buffer(kid).toString('base64');
     return dcc;
   }
 
