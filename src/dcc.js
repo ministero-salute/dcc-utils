@@ -6,6 +6,7 @@ const jsQR = require('jsqr');
 const base45 = require('base45');
 const cbor = require('cbor');
 const cose = require('cose-js');
+const coseCommon = require('cose-js/lib/common');
 const rs = require('jsrsasign');
 const { verify, webcrypto, SignatureMismatchError } = require('cosette/build/sign');
 
@@ -21,8 +22,8 @@ class DCC {
     const cborPayload = messageObject.value[2];
     const jsonCBOR = cbor.decodeFirstSync(cborPayload);
     dcc._payload = jsonCBOR.get(-260).get(1);
-    var kid = cbor.decodeFirstSync(protectedHeader).get(4);
-    if(kid === undefined) kid = unprotectedHeader.get(4);
+    var kid = cbor.decodeFirstSync(protectedHeader).get(coseCommon.HeaderParameters.kid);
+    if(kid === undefined) kid = unprotectedHeader.get(coseCommon.HeaderParameters.kid);
     dcc._kid = new Buffer(kid).toString('base64');
     return dcc;
   }
