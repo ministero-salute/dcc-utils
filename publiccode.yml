@@ -6,7 +6,7 @@ releaseDate: '2021-10-12'
 softwareType: standalone/mobile
 softwareVersion: v0.3.0
 developmentStatus: stable
-logo: img/logo-dgc.png
+logo: .public/logo-dgc.png
 platforms:
   - windows, mac, linux
 usedBy:
