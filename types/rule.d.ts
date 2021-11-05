@@ -1,6 +1,4 @@
-import { DCC } from "./index";
-
-export = Rule;
+import {DCC} from "./";
 
 declare class Rule {
   static fromFile(filePath: string | Buffer | URL, external?: Record<string, any>): Rule;
@@ -13,3 +11,5 @@ declare class Rule {
 
   evaluateDCC(dcc: DCC, external?: Record<string, any>): any;
 }
+
+export {Rule}

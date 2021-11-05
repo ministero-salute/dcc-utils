@@ -1,17 +1,15 @@
 import { DCCPayload } from "./models";
 
-export = DCC;
-
 declare class DCC {
   static fromRaw(certificateRaw: string): Promise<DCC>;
 
   static fromImage(certificateImagePath: string | Buffer | URL): Promise<DCC>;
 
-  static get raw(): string;
+  get raw(): string;
 
-  static get payload(): DCCPayload;
+  get payload(): DCCPayload;
 
-  checkSignature(signatureKey: { x: Buffer, y: Buffer, kid?: Buffer }): Promise<Buffer>;
+  checkSignature(signatureKey: { x: string | Buffer, y: string | Buffer, kid?: string | Buffer }): Promise<Buffer>;
 
   checkSignatureWithCertificate(certificate: Buffer): Promise<Buffer>;
 
@@ -24,3 +22,5 @@ declare class DCC {
    */
   checkSignatureWithKeysList(keys: Record<string, any>): Promise<boolean | any>;
 }
+
+export { DCC, DCCPayload }
