@@ -23,7 +23,7 @@ class DCC {
     const jsonCBOR = cbor.decodeFirstSync(cborPayload);
     dcc._payload = jsonCBOR.get(-260).get(1);
     let kid = cbor.decodeFirstSync(protectedHeader).get(coseCommon.HeaderParameters.kid);
-    if(kid === undefined) kid = unprotectedHeader.get(coseCommon.HeaderParameters.kid);
+    if (kid === undefined) kid = unprotectedHeader.get(coseCommon.HeaderParameters.kid);
     dcc._kid = Buffer.from(kid).toString('base64');
     return dcc;
   }
