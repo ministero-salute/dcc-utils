@@ -35,7 +35,6 @@
   ],
   "license": "AGPL-3.0",
   "dependencies": {
-    "base45": "^3.0.0",
     "cbor": "^7.0.6",
     "certlogic-js": "^0.8.0",
     "cose-js": "^0.7.0",
