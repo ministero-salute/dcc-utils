@@ -7,6 +7,8 @@ declare class DCC {
 
   get raw(): string;
 
+  get kid(): string;
+
   get payload(): DCCPayload;
 
   checkSignature(signatureKey: { x: string | Buffer, y: string | Buffer, kid?: string | Buffer }): Promise<Buffer>;
