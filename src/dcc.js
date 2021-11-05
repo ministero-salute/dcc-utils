@@ -2,11 +2,11 @@ const fs = require('fs');
 const zlib = require('zlib');
 const Jimp = require('jimp');
 const jsQR = require('jsqr');
+const base45 = require('base45');
 const cbor = require('cbor');
 const cose = require('cose-js');
 const rs = require('jsrsasign');
 const { verify, webcrypto, SignatureMismatchError } = require('cosette/build/sign');
-const base45 = require('./base45');
 
 class DCC {
   static async fromRaw(certificateRaw) {
