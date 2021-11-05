@@ -5,6 +5,7 @@ const jsQR = require('jsqr');
 const base45 = require('base45');
 const cbor = require('cbor');
 const cose = require('cose-js');
+const coseCommon = require('cose-js/lib/common');
 const rs = require('jsrsasign');
 const { verify, webcrypto, SignatureMismatchError } = require('cosette/build/sign');
 
@@ -14,9 +15,15 @@ class DCC {
     dcc._raw = certificateRaw;
     const base45Data = base45.decode(certificateRaw.slice(4));
     dcc._coseRaw = zlib.inflateSync(base45Data);
-    const cborPayload = cbor.decodeFirstSync(dcc._coseRaw).value[2];
+    const messageObject = cbor.decodeFirstSync(dcc._coseRaw);
+    const protectedHeader = messageObject.value[0];
+    const unprotectedHeader = messageObject.value[1];
+    const cborPayload = messageObject.value[2];
     const jsonCBOR = cbor.decodeFirstSync(cborPayload);
     dcc._payload = jsonCBOR.get(-260).get(1);
+    let kid = cbor.decodeFirstSync(protectedHeader).get(coseCommon.HeaderParameters.kid);
+    if (kid === undefined) kid = unprotectedHeader.get(coseCommon.HeaderParameters.kid);
+    dcc._kid = Buffer.from(kid).toString('base64');
     return dcc;
   }
 
@@ -33,6 +40,10 @@ class DCC {
 
   get payload() {
     return this._payload;
+  }
+
+  get kid() {
+    return this._kid;
   }
 
   async checkSignature(signatureKey) {
