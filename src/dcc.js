@@ -18,13 +18,13 @@ class DCC {
     dcc._coseRaw = zlib.inflateSync(base45Data);
     const messageObject = cbor.decodeFirstSync(dcc._coseRaw);
     const protectedHeader = messageObject.value[0];
-    const unprotectedHeader = messageObject.value[1];	
+    const unprotectedHeader = messageObject.value[1];
     const cborPayload = messageObject.value[2];
     const jsonCBOR = cbor.decodeFirstSync(cborPayload);
     dcc._payload = jsonCBOR.get(-260).get(1);
-    var kid = cbor.decodeFirstSync(protectedHeader).get(coseCommon.HeaderParameters.kid);
+    let kid = cbor.decodeFirstSync(protectedHeader).get(coseCommon.HeaderParameters.kid);
     if(kid === undefined) kid = unprotectedHeader.get(coseCommon.HeaderParameters.kid);
-    dcc._kid = new Buffer(kid).toString('base64');
+    dcc._kid = Buffer.from(kid).toString('base64');
     return dcc;
   }
 
@@ -42,7 +42,7 @@ class DCC {
   get payload() {
     return this._payload;
   }
-  
+
   get kid() {
     return this._kid;
   }
