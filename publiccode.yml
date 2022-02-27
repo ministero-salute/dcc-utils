@@ -14,6 +14,25 @@ usedBy:
 categories:
   - data-visualization
 description:
+  it:
+    apiDocumentation: "https://github.com/ministero-salute/it-dgc-documentation"
+    documentation: "https://github.com/ministero-salute/dcc-utils"
+    features:
+      - Ottenere i dati del DCC
+      - Verificare la firma del DCC
+      - Verificare l'applicazione delle regole al DCC
+    genericName: DCC-Utils
+    longDescription: >
+      Pacchetto NPM contenente una serie di funzioni per leggere i Certificati 
+      EU Digital COVID e verificarne firme e regole.
+      Puoi trovare maggiori informazioni su come installare e utilizzare la 
+      libreria [qui](https://github.com/ministero-salute/dcc-utils#readme).
+      Puoi trovare alcuni esempi su come utilizzare il pacchetto DCC-Utils 
+      all'interno della [sezione esempi](https://github.com/ministero-salute/dcc-utils/tree/master/examples).
+      Per maggiori informazioni su DCC, si rimanda alla [nostra documentazione](https://github.com/ministero-salute/it-dgc-documentation).
+    shortDescription: >-
+      Pacchetto NPM contenente una serie di funzioni per leggere i Certificati 
+      EU Digital COVID e verificarne firme e regole.
   en:
     apiDocumentation: "https://github.com/ministero-salute/it-dgc-documentation"
     documentation: "https://github.com/ministero-salute/dcc-utils"
